@@ -16,7 +16,7 @@ O Sistema de Gerenciamento para Clínicas é uma aplicação web voltada para a 
 Para executar este projeto localmente, siga estas etapas:
 
 1. Clone este repositório: `git clone https://github.com/seu-usuario/sistema-clinica.git`
-2. Instale as dependências: `npm install` ou `yarn install`
+2. Instale as dependências: `composer install && npm install` ou `composer install && yarn install`
 3. Configure as variáveis de ambiente necessárias, como credenciais de banco de dados e chaves de acesso.
 
 ## Uso
