@@ -24,12 +24,18 @@ import Chart from "./Dashboards/Chart.vue";
             </div>
         </div>
 
-        <div class="py-12">
+        <VCard>
+            <VCardText>
+                <Chart title="2023" />
+            </VCardText>
+        </VCard>
+        <!--
+            <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <Chart title="2023" />
                 </div>
             </div>
         </div>
+        -->
     </AuthenticatedLayout>
 </template>
