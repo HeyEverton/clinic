@@ -3,6 +3,16 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { VCardText, VDataTableServer } from "vuetify/lib/components/index.mjs";
 import GeneralButton from "../../Components/GeneralButton.vue";
+import { computed } from "vue";
+import { LengthAwarePaginator } from "../../types";
+import TextInput from '@/Components/TextInput.vue';
+import Select from "@/Components/Select.vue";
+
+interface Props {
+    users: LengthAwarePaginator;
+}
+
+const props = defineProps<Props>();
 const fakeData = [
     {
         name: "Everton Henrique",
@@ -31,7 +41,7 @@ const headers = [
     },
     {
         title: "Data de nascimento",
-        key: "birthDate",
+        key: "birth_date_formatted",
         sortable: true,
     },
     {
@@ -68,6 +78,10 @@ const itemsPerPageOptions = [
         value: -1,
     },
 ];
+
+const users = computed(() => {
+    return props.users.data;
+});
 </script>
 <template>
     <Head title="Dashboard" />
@@ -80,20 +94,35 @@ const itemsPerPageOptions = [
         </template>
 
         <VCard>
+            <!-- <VCardItem> -->
+            <!-- </VCardItem> -->
             <VCardText>
+                <VRow>
+                    <VCol cols="12" md="3">
+                        <Select :items="[{value: 'teste', name: 'teste'}]"/>
+                        <!-- <TextInput
+                            id="email"
+                            class="rounded-md border"
+                            required
+                        /> -->
+                    </VCol>
+                </VRow>
                 <VDataTableServer
                     :items-length="fakeData.length"
                     density="comfortable"
                     no-data-text="Nenhum usuário foi encontrado"
-                    :items="fakeData"
+                    :items="users"
                     :headers="headers"
                     items-per-page-text="Linhas por página"
                     show-current-page
                     :items-per-page-options="itemsPerPageOptions"
                 >
                     <template #item.actions="{ item }">
-                        <GeneralButton button-text="Excluir" badge
-badgeContent="2" />
+                        <GeneralButton
+                            button-text="Excluir"
+                            badge
+                            badgeContent="2"
+                        />
                     </template>
                 </VDataTableServer>
             </VCardText>
