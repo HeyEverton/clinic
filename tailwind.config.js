@@ -8,6 +8,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+        './node_modules/tw-elements/dist/js/**/*.js'
+
     ],
 
     theme: {
@@ -15,8 +17,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'primary': '#FFF2F4',
+                'secondary': '#BEFFF3',
+            }
         },
     },
-
-    plugins: [forms],
+    darkMode: "class",
+    plugins: [forms, require("tw-elements/dist/plugin.cjs")],
 };

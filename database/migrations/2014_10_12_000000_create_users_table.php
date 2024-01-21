@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            // role enum
+            $table->enum('role', []);
+            $table->string('phone_number');
+            $table->date('birthdate');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
