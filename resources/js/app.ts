@@ -5,6 +5,7 @@ import { createApp, h, DefineComponent } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import { mask } from 'vue-the-mask'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 import 'vuetify/styles'
@@ -23,6 +24,8 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(vuetify)
+            .directive('mask', mask)
+
             .use(ZiggyVue)
             .mount(el);
     },

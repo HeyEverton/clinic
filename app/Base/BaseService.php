@@ -17,11 +17,14 @@ class BaseService
         return $this->model->simplePaginate($options['per_page'] ?? 15);
     }
 
-    public function create(array $payload): int
+    public function create(array $payload, string $shouldReturnResource = 'no_return'): int | object
     {
-        $this->model->create($payload);
+        $record = $this->model->create($payload);
 
-        return 201;
+        if ($shouldReturnResource && $shouldReturnResource == 'return_resource') {
+            return $record;
+        }
+        return Response::HTTP_CREATED;
     }
 
     public function update(array $payload, string $id)
