@@ -3,30 +3,17 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { VCardText, VDataTableServer } from "vuetify/lib/components/index.mjs";
 import GeneralButton from "../../Components/GeneralButton.vue";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { LengthAwarePaginator } from "../../types";
-import TextInput from '@/Components/TextInput.vue';
+import TextInput from "@/Components/TextInput.vue";
 import Select from "@/Components/Select.vue";
+import { Tooltip, initTE } from "tw-elements";
 
 interface Props {
     users: LengthAwarePaginator;
 }
 
 const props = defineProps<Props>();
-const fakeData = [
-    {
-        name: "Everton Henrique",
-        email: "everton@everton.com",
-        birthDate: "10/10/2002",
-        phone_number: "+55 (11) 11111-1111",
-    },
-    {
-        name: "Daniel Lima",
-        email: "daniel@daniel.com",
-        birthDate: "10/04/2000",
-        phone_number: "+55 (11) 22222-2222",
-    },
-];
 
 const headers = [
     {
@@ -82,6 +69,10 @@ const itemsPerPageOptions = [
 const users = computed(() => {
     return props.users.data;
 });
+
+onMounted(() => {
+    initTE({ Tooltip });
+});
 </script>
 <template>
     <Head title="Dashboard" />
@@ -99,16 +90,17 @@ const users = computed(() => {
             <VCardText>
                 <VRow>
                     <VCol cols="12" md="3">
-                        <Select :items="[{value: 'teste', name: 'teste'}]"/>
+                        <Select :items="[{ value: 'teste', name: 'teste' }]" />
                         <!-- <TextInput
                             id="email"
                             class="rounded-md border"
                             required
                         /> -->
                     </VCol>
+
                 </VRow>
                 <VDataTableServer
-                    :items-length="fakeData.length"
+                    :items-length="users.length"
                     density="comfortable"
                     no-data-text="Nenhum usuário foi encontrado"
                     :items="users"
